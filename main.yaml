@@ -17,14 +17,14 @@
           state: started
           enabled: yes
 
-        rescue:
-          - name: print error message
-            ansible.builtin.debug:
-              msg: "failed to start nginx server"
+    rescue:
+      - name: print error message
+        ansible.builtin.debug:
+          msg: "failed to start nginx server"
 
-        always:
-          - name: Execution completed
-            ansible.builtin.debug:
-              msg: "Execution of block completed"
+    always:
+      - name: Execution completed
+        ansible.builtin.debug:
+          msg: "Execution of block completed"
 
           
