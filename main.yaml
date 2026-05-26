@@ -13,8 +13,8 @@
       - name: stop nginx server
         ansible.builtin.service:
           name: nginx
-          state:started
-          enabled:yes
+          state: started
+          enabled: yes
 
     rescue:
       - name: print error message
@@ -25,6 +25,6 @@
       - name: Execution completed
         ansible.builtin.debug:
           msg: "Execution of block completed"
-    ignore_errors: true
+
 
           
