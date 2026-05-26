@@ -3,28 +3,28 @@
   become: yes
   gather_facts: no
   tasks:
+    - name: install nginx and start the service
+      block:
+        - name: install nginx
+          ansible.builtin.package:
+            name: nginx
+            state: present
 
-    block:
-      - name: install nginx
-        ansible.builtin.package:
-          name: nginx
-          state: present
+        - name: stop nginx server
+          ansible.builtin.service:
+            name: nginx
+            state: started
+            enabled: yes
 
-      - name: stop nginx server
-        ansible.builtin.service:
-          name: nginx
-          state: started
-          enabled: yes
+      rescue:
+        - name: print error message
+          ansible.builtin.debug:
+            msg: "failed to start nginx server"
 
-    rescue:
-      - name: print error message
-        ansible.builtin.debug:
-          msg: "failed to start nginx server"
-
-    always:
-      - name: Execution completed
-        ansible.builtin.debug:
-          msg: "Execution of block completed"
+      always:
+        - name: Execution completed
+          ansible.builtin.debug:
+            msg: "Execution of block completed"
 
 
           
