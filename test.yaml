@@ -1,16 +1,31 @@
 ---
-- name: Check disk space
+- name: Read data from Linux target nodes
   hosts: test
-  become: yes
   gather_facts: true
   tasks:
-    - name: check disk space
-      ansible.builtin.shell: df -h
-      register: disk_space
 
-    - name: print disk space
+    - name: Get the contents of the /etc/hostname file
+      ansible.builtin.command: cat /etc/hostname
+      register: hostname_output
+      changed_when: false
+
+    - name: Print the hostname content
       ansible.builtin.debug:
-        var: disk_space.stdout
+        msg: "The hostname file contains: {{ hostname_output.stdout }}"
+
+    - name: Fetch OS distribution from gathered facts
+      ansible.builtin.debug:
+        msg: "The target OS is {{ ansible_facts['distribution'] }} version {{ ansible_facts['distribution_version'] }}"
+
+    - name: Check available disk space on root directory
+      ansible.builtin.shell: df -h / | awk 'NR==2 {print $4}'
+      register: disk_space
+      changed_when: false
+
+    - name: Print available disk space
+      ansible.builtin.debug:
+        msg: "Available space on / is {{ disk_space.stdout }}"
+
 
 
 
