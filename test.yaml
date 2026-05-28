@@ -10,7 +10,7 @@
 
     - name: print disk space
       ansible.builtin.debug:
-        msg: "{{ disk_space.stdout }}"
+        var: disk_space.stdout
 
 
 
