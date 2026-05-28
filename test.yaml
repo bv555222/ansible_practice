@@ -21,6 +21,10 @@
       ansible.builtin.debug:
         msg: "The target OS is {{ ansible_facts['distribution'] }} version {{ ansible_facts['distribution_version'] }}"
 
+    - name: check ip address of the target node
+      ansible.builtin.debug:
+        var: ansible_facts['default_ipv4']['address']
+        
     - name: Check available disk space on root directory
       ansible.builtin.shell: df -h / | awk 'NR==2 {print $4}'
       register: disk_space
