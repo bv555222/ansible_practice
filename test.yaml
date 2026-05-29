@@ -1,27 +1,20 @@
 ---
-- name: Read data from Linux target nodes
+- name: Read data from Linux machine
   hosts: test
   gather_facts: true
   tasks:
-
-    - name: Fetch OS distribution from gathered facts
+    - name: Print OS distribution
       ansible.builtin.debug:
-        msg: "The target OS is {{ ansible_facts['distribution'] }} version {{ ansible_facts['distribution_version'] }}"
+        msg: "The OS distribution is {{ ansible_facts['distribution'] }} version {{ ansible_facts['distribution_version'] }}"
 
-    - name: check ip address of the target node
+    - name: Print ip address 
       ansible.builtin.debug:
-        msg: "The IP address of the target node is: {{ ansible_facts['default_ipv4']['address'] }}"
+        msg: "IP address : {{ ansible_facts['default_ipv4']['address'] }}"
 
     - name: Check available disk space on root directory
       ansible.builtin.shell: df -h / | awk 'NR==2 {print $4}'
       register: disk_space
-      changed_when: false
 
     - name: Print available disk space
       ansible.builtin.debug:
         msg: "Available space on / is {{ disk_space.stdout }}"
-
-
-
-
-  
