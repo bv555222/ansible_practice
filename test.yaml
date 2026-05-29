@@ -30,4 +30,4 @@
 
     - name: Print Disk usage
       ansible.builtin.debug:
-        msg: "{{ disk_space.stdout_lines }}"
+        var: disk_space.stdout_lines
