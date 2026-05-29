@@ -3,16 +3,6 @@
   hosts: test
   gather_facts: true
   tasks:
-
-    # - name: print gathered facts
-    #   ansible.builtin.debug:
-    #     var: ansible_facts
-
-    - name: Get the contents of the /etc/hostname file
-      ansible.builtin.command: cat /etc/hostname
-      register: hostname_output
-      changed_when: false
-
     - name: Print the hostname content
       ansible.builtin.debug:
         msg: "The hostname file contains: {{ hostname_output.stdout }}"
