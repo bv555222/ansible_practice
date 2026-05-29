@@ -30,7 +30,7 @@
 
     - name: Print top 5 processes
       ansible.builtin.debug:
-        msg: {{ cpu_usage }}
+        msg: "{{ cpu_usage }}"
 
   
 
