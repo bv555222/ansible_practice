@@ -3,6 +3,11 @@
   hosts: test
   gather_facts: true
   tasks:
+
+    - name: Print hostname
+      ansible.builtin.debug:
+        msg: "Hostname: {{ ansible_hostname}}"
+  
     - name: Print OS distribution
       ansible.builtin.debug:
         msg: "The OS distribution is {{ ansible_facts['distribution'] }} version {{ ansible_facts['distribution_version'] }}"
