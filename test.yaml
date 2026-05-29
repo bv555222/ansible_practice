@@ -24,10 +24,14 @@
       ansible.builtin.debug:
         msg: "Available space on / is {{ disk_space.stdout }}"
 
-    - name: Check Disk usage
-      ansible.builtin.shell: df -h --output=source,size,used,avilable,percentage,target | column -t
-      register: disk_space
+    - name: Top 5 high CPU usage processes
+      ansible.builtin.shell: ps aux --sort=-%CPU | head -6
+      register: cpu_usage
 
-    - name: Print Disk usage
+    - name: Print top 5 processes
       ansible.builtin.debug:
-        var: disk_space.stdout_lines
+        var: cpu_usage.stdout.lines
+
+  
+
+
