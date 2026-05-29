@@ -23,3 +23,11 @@
     - name: Print available disk space
       ansible.builtin.debug:
         msg: "Available space on / is {{ disk_space.stdout }}"
+
+    - name: Check Disk usage
+      ansible.builtin.shell: df -h --output=source,size,used,avilable,percentage,target | column -target
+      register: disk_space
+
+    - name: Print Disk usage
+      ansible.builtin.debug:
+        msg: {{ disk_space.stdout_lines }}
