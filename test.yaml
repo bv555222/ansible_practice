@@ -3,9 +3,6 @@
   hosts: test
   gather_facts: true
   tasks:
-    - name: Print the hostname content
-      ansible.builtin.debug:
-        msg: "The hostname file contains: {{ hostname_output.stdout }}"
 
     - name: Fetch OS distribution from gathered facts
       ansible.builtin.debug:
