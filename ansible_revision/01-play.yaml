@@ -1,0 +1,9 @@
+---
+- name: Print Welcome msg
+  hostes: server
+  gather_facts: false
+  tasks:
+    - name: Print Welcome note
+      ansible.builtin.debug:
+        msg: "Welcome to Ansible Project"
+        
