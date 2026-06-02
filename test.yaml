@@ -20,13 +20,11 @@
         msg: "Available space on / is {{ disk_space.stdout }}"
 
     - name: Top 5 high CPU usage processes
-      ansible.builtin.shell: "ps aux --sort=-%CPU | head -6"
+      ansible.builtin.shell: ps aux --sort=-%CPU | head -6
       register: cpu_usage
 
     - name: Print top 5 processes
       ansible.builtin.debug:
         msg: "{{ cpu_usage.stdout_lines }}"
-
-  
 
 
