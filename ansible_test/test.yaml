@@ -1,6 +1,7 @@
 ---
 - name: Read data from Linux target nodes
   hosts: test
+  become: yes
   gather_facts: true
   tasks:
 
